@@ -1,0 +1,83 @@
+:root {
+  font-family: 'Karla', sans-serif;
+  background: #1F2937;
+  color: white;
+
+}
+
+
+body {
+  margin: 0; 
+}
+
+.container {
+  margin-top: 100px;
+  margin-left: 100px;
+  margin-right: 50px; 
+}
+
+h1 {
+  font-weight: 700; 
+  line-height: 1;
+  font-size: 65px; 
+  margin-bottom: 0;
+}
+
+span {
+  color: #4ADF86;
+}
+
+h2 {
+  font-weight: 300; 
+  margin-top: 10px;
+  font-size: 35px; 
+}
+
+button {
+  background: #10B981;
+  border: none;
+  border-radius: 5px; 
+  color: white;
+  padding: 10px 20px;
+  font-size: 20px;  
+  margin: 60px 10px 50px 0;
+}
+
+/* .horizontal-line {
+  width: 800px;
+  height: 2px; 
+  background: #2F3E53;
+
+} */
+.password-wrapper {
+  display: flex;
+  border-top: 2px solid #2F3E53; 
+  width: 1000px;
+  justify-content: center;
+}
+
+.password-section {
+  width: 510px;
+  height: 60px; 
+  background-color: #273549;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px; 
+  margin-top: 50px; 
+  font-size: 20px;
+  text-align: center;
+  line-height: 58px;
+}
+
+.customize-wrapper {
+  margin-top: 40px; 
+}
+
+#password-length {
+  padding: 10px;
+}
+
+img {
+  width: 30px;
+  height: 30px;
+}
