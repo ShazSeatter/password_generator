@@ -67,7 +67,6 @@ passwordElOne.addEventListener("click", function() {
     console.error('Failed to copy');
     /* Rejected - text failed to copy to the clipboard */
   });
-  alert("Password copied")
 })
 
 
