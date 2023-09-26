@@ -11,9 +11,7 @@ body {
 }
 
 .container {
-  margin-top: 100px;
-  margin-left: 100px;
-  margin-right: 50px; 
+  margin: 100px 50px 100px 100px;
 }
 
 h1 {
@@ -23,15 +21,19 @@ h1 {
   margin-bottom: 0;
 }
 
-span {
-  color: #4ADF86;
-}
-
 h2 {
   font-weight: 300; 
   margin-top: 10px;
   font-size: 35px; 
 }
+
+h3 {
+  font-size: 25px;
+}
+span {
+  color: #4ADF86;
+}
+
 
 button {
   background: #10B981;
@@ -88,4 +90,5 @@ img {
 
 .labels {
   font-size: 20px;
+  margin-left: 10px;
 }

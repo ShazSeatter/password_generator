@@ -19,6 +19,8 @@ document.querySelector('#app').innerHTML = `
     <label class="labels">Enter length: </label>
     <input id="password-length" type="number" id="length" name="length" min="5" max="20">
     <p id="password-error"></p>
+    <label class="labels">Letters: </label>
+    <input id="letters-toggle" type="checkbox" name="letters" checked>
     <label class="labels">Symbols: </label>
     <input id="symbols-toggle" type="checkbox" name="symbol" checked>
     <label class="labels">Numbers: </label>
@@ -39,6 +41,8 @@ const charactersSymbols = ["A","B","C","D","E","F","G","H","I","J","K","L","M","
 
 const charactersAlapha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 
+const charactersNumbersSymbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",","|",":",";","<",">",".","?","/"]
+
 let generateBtn = document.querySelector("#generate-el")
 let clearBtn = document.querySelector("#clear-el")
 let passwordElOne = document.querySelector("#password-el-one")
@@ -48,11 +52,12 @@ let errorMessage = document.querySelector("#password-error")
 let copiedEl = document.querySelector("#copied-el")
 let symbolsToggle = document.querySelector("#symbols-toggle:checked")
 let numbersToggle = document.querySelector("#numbers-toggle:checked")
-
+let lettersToggle = document.querySelector("#letters-toggle:checked")
 
 // check box will be checked on render of page 
 let includeSymbols = true;
 let includeNumbers = true;
+let includeLetters = true; 
 
 generateBtn.addEventListener("click", function() {
   const passwordLength = parseInt(passwordLengthEl.value);
@@ -71,12 +76,19 @@ generateBtn.addEventListener("click", function() {
 })
 
 function generatePassword(passwordLength) {
-  if (includeSymbols === true && includeNumbers === true) {
+  if (includeSymbols === true && includeNumbers === true && includeLetters === true) {
     for (let i = 0; i < passwordLength; i++) {
       let randomIndexOne = Math.floor(Math.random() * characters.length)
       let randomIndexTwo = Math.floor(Math.random() * characters.length)
       passwordElOne.textContent += characters[randomIndexOne]
       passwordElTwo.textContent += characters[randomIndexTwo]
+    } 
+  } else if (includeSymbols === true && includeNumbers === true) {
+    for (let i = 0; i < passwordLength; i++) {
+      let randomIndexOne = Math.floor(Math.random() * charactersNumbersSymbols.length)
+      let randomIndexTwo = Math.floor(Math.random() * charactersNumbersSymbols.length)
+      passwordElOne.textContent += charactersNumbersSymbols[randomIndexOne]
+      passwordElTwo.textContent += charactersNumbersSymbols[randomIndexTwo]
     } 
   } else if (includeSymbols === true) {
     for (let i = 0; i < passwordLength; i++) {
@@ -92,7 +104,7 @@ function generatePassword(passwordLength) {
     passwordElOne.textContent += charactersNumbers[randomIndexOne]
     passwordElTwo.textContent += charactersNumbers[randomIndexTwo]
   } 
-} else {
+} else if (includeLetters === true) {
   for (let i = 0; i < passwordLength; i++) {
     let randomIndexOne = Math.floor(Math.random() * charactersAlapha.length)
     let randomIndexTwo = Math.floor(Math.random() * charactersAlapha.length)
@@ -144,4 +156,9 @@ symbolsToggle.addEventListener("change", function () {
 numbersToggle.addEventListener("change", function () {
   includeNumbers = numbersToggle.checked;
   console.log(numbersToggle.checked)
+})
+
+lettersToggle.addEventListener("change", function () {
+  includeLetters = lettersToggle.checked;
+  console.log(lettersToggle.checked)
 })
