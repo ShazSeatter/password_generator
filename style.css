@@ -81,3 +81,11 @@ img {
   width: 30px;
   height: 30px;
 }
+
+.copied {
+  margin-left: 10px;
+}
+
+.labels {
+  font-size: 20px;
+}
