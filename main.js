@@ -12,18 +12,21 @@ document.querySelector('#app').innerHTML = `
       <div id="password-el-two" class="password-section"></div>
     </div>
     <p id="copied-el" class="copied"></p>
-    <div class="customize-wrapper">
-    <h3>Customize your password:</h3>
 
-    <label class="labels">Enter length: </label>
-    <input id="password-length" type="number" id="length" name="length" min="5" max="20">
-    <p id="password-error"></p>
-    <label class="labels">Letters: </label>
-    <input id="letters-toggle" type="checkbox" name="letters" checked>
-    <label class="labels">Symbols: </label>
-    <input id="symbols-toggle" type="checkbox" name="symbol" checked>
-    <label class="labels">Numbers: </label>
-    <input id="numbers-toggle" type="checkbox" name="number" checked>
+    <div class="customize-wrapper">
+      <h3>Customize your password:</h3>
+      <label class="labels">Enter length: </label>
+      <input id="password-length" type="number" id="length" name="length" min="5" max="20">
+      <p id="password-error"></p>
+      
+      <div class="checkbox-wrapper">
+        <label class="labels">Letters: </label>
+        <input id="letters-toggle" type="checkbox" name="letters" checked>
+        <label class="labels">Symbols: </label>
+        <input id="symbols-toggle" type="checkbox" name="symbol" checked>
+        <label class="labels">Numbers: </label>
+        <input id="numbers-toggle" type="checkbox" name="number" checked>
+      </div>
     </div>
 
 
@@ -42,6 +45,10 @@ const charactersAlapha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N
 
 const charactersNumbersSymbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",","|",":",";","<",">",".","?","/"]
 
+const charactersNumberOnly = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+const charactersSymbolsOnly = ["~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",","|",":",";","<",">",".","?","/"]
+
 let generateBtn = document.querySelector("#generate-el")
 let passwordElOne = document.querySelector("#password-el-one")
 let passwordElTwo = document.querySelector("#password-el-two")
@@ -56,22 +63,20 @@ let lettersToggle = document.querySelector("#letters-toggle:checked")
 let includeSymbols = true;
 let includeNumbers = true;
 let includeLetters = true; 
+let testing = true;
 
 generateBtn.addEventListener("click", function() {
   const passwordLength = parseInt(passwordLengthEl.value);
-  
 
   if (passwordLength > 20) {
     errorMessage.textContent = "Length cannot exceed 20 characters"
   } else if (passwordLength < 5) {
     errorMessage.textContent = "Length cannot be less than 5 characters"
   } else if (passwordElOne.innerHTML === "" && passwordElTwo.innerHTML === "") {
-      passwordElOne.innerHTML = "";
-      passwordElTwo.innerHTML = "";
+      clearFields()
       generatePassword(passwordLength)
     } else {
-      passwordElOne.innerHTML = "";
-      passwordElTwo.innerHTML = "";
+      clearFields()
       generatePassword(passwordLength);
       copiedEl.textContent = "";
   }
@@ -84,47 +89,44 @@ generateBtn.addEventListener("click", function() {
 
 })
 
+// clear fields before regenerating password 
+function clearFields() {
+  passwordElOne.innerHTML = "";
+  passwordElTwo.innerHTML = "";
+}
+
+
+
+// function to generator a password based on length only - has inner function call for customized passwords 
 function generatePassword(passwordLength) {
   if (includeSymbols === true && includeNumbers === true && includeLetters === true) {
-    for (let i = 0; i < passwordLength; i++) {
-      let randomIndexOne = Math.floor(Math.random() * characters.length)
-      let randomIndexTwo = Math.floor(Math.random() * characters.length)
-      passwordElOne.textContent += characters[randomIndexOne]
-      passwordElTwo.textContent += characters[randomIndexTwo]
-    } 
+    generateCustomizedPassword(passwordLength, characters)
   } else if (includeSymbols === true && includeNumbers === true) {
-    for (let i = 0; i < passwordLength; i++) {
-      let randomIndexOne = Math.floor(Math.random() * charactersNumbersSymbols.length)
-      let randomIndexTwo = Math.floor(Math.random() * charactersNumbersSymbols.length)
-      passwordElOne.textContent += charactersNumbersSymbols[randomIndexOne]
-      passwordElTwo.textContent += charactersNumbersSymbols[randomIndexTwo]
-    } 
+    generateCustomizedPassword(passwordLength, charactersNumbersSymbols)
+  }  else if (includeSymbols === true && includeLetters === true) {
+    generateCustomizedPassword(passwordLength, charactersSymbols)
+  } else if (includeNumbers === true && includeLetters === true) {
+    generateCustomizedPassword(passwordLength, charactersNumbers)
   } else if (includeSymbols === true) {
-    for (let i = 0; i < passwordLength; i++) {
-      let randomIndexOne = Math.floor(Math.random() * charactersSymbols.length)
-      let randomIndexTwo = Math.floor(Math.random() * charactersSymbols.length)
-      passwordElOne.textContent += charactersSymbols[randomIndexOne]
-      passwordElTwo.textContent += charactersSymbols[randomIndexTwo]
-    } 
+    generateCustomizedPassword(passwordLength, charactersSymbolsOnly)
   } else if (includeNumbers === true) { 
-    for (let i = 0; i < passwordLength; i++) {
-    let randomIndexOne = Math.floor(Math.random() * charactersNumbers.length)
-    let randomIndexTwo = Math.floor(Math.random() * charactersNumbers.length)
-    passwordElOne.textContent += charactersNumbers[randomIndexOne]
-    passwordElTwo.textContent += charactersNumbers[randomIndexTwo]
-  } 
-} else if (includeLetters === true) {
+    generateCustomizedPassword(passwordLength, charactersNumberOnly)
+  } else if (includeLetters === true) {
+    generateCustomizedPassword(passwordLength, charactersAlapha)
+  }
+}
+
+// function to pass customized array for password generation 
+function generateCustomizedPassword(passwordLength, characterArr) {
   for (let i = 0; i < passwordLength; i++) {
-    let randomIndexOne = Math.floor(Math.random() * charactersAlapha.length)
-    let randomIndexTwo = Math.floor(Math.random() * charactersAlapha.length)
-    passwordElOne.textContent += charactersAlapha[randomIndexOne]
-    passwordElTwo.textContent += charactersAlapha[randomIndexTwo]
+    let randomIndexOne = Math.floor(Math.random() * characterArr.length)
+    let randomIndexTwo = Math.floor(Math.random() * characterArr.length)
+    passwordElOne.textContent += characterArr[randomIndexOne]
+    passwordElTwo.textContent += characterArr[randomIndexTwo]
   } 
 }
-  
-}
 
-
+// Click event listeners 
 passwordElOne.addEventListener("click", function() {
   let passwordCopyOne = passwordElOne.textContent
   console.log(passwordCopyOne)
@@ -151,7 +153,7 @@ passwordElTwo.addEventListener("click", function() {
   copiedEl.textContent = "Copied password two"
 })
 
-
+// customization change even listeners 
 symbolsToggle.addEventListener("change", function () {
   includeSymbols = symbolsToggle.checked;
   console.log(symbolsToggle.checked)

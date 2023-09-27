@@ -12,6 +12,7 @@ body {
 
 .container {
   margin: 100px 50px 100px 100px;
+  /* text-align: center; */
 }
 
 h1 {
@@ -43,19 +44,26 @@ button {
   padding: 10px 20px;
   font-size: 20px;  
   margin: 60px 10px 50px 0;
+  font-family: 'Karla', sans-serif;
 }
 
-/* .horizontal-line {
-  width: 800px;
-  height: 2px; 
-  background: #2F3E53;
+button:hover {
+  background: white;
+  color:#10B981;
+  box-shadow: 5px 5px #10B981;
+}
 
-} */
+input[type=checkbox] {
+  transform: scale(1.5);
+}
+
 .password-wrapper {
   display: flex;
   border-top: 2px solid #2F3E53; 
-  width: 1000px;
+  width: 100%;
   justify-content: center;
+  box-sizing: border-box;
+
 }
 
 .password-section {
@@ -72,23 +80,25 @@ button {
 }
 
 .customize-wrapper {
-  margin-top: 40px; 
+  margin-top: 50px; 
 }
 
 #password-length {
-  padding: 10px;
-}
-
-img {
-  width: 30px;
-  height: 30px;
+  padding: 10px 15px;
+  font-size: 15px; 
+  width: 50px; 
 }
 
 .copied {
   margin-left: 10px;
 }
 
+.checkbox-wrapper {
+  margin-top: 30px;
+}
+
 .labels {
   font-size: 20px;
   margin-left: 10px;
 }
+
