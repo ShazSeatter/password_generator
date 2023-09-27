@@ -61,18 +61,29 @@ let includeLetters = true;
 
 generateBtn.addEventListener("click", function() {
   const passwordLength = parseInt(passwordLengthEl.value);
+  
+
   if (passwordLength > 20) {
     errorMessage.textContent = "Length cannot exceed 20 characters"
   } else if (passwordLength < 5) {
     errorMessage.textContent = "Length cannot be less than 5 characters"
   } else if (passwordElOne.innerHTML === "" && passwordElTwo.innerHTML === "") {
-    generatePassword(passwordLength)
-  } 
-
+      passwordElOne.innerHTML = "";
+      passwordElTwo.innerHTML = "";
+      generatePassword(passwordLength)
+    } else {
+      passwordElOne.innerHTML = "";
+      passwordElTwo.innerHTML = "";
+      generatePassword(passwordLength);
+      copiedEl.textContent = "";
+  }
+  
   if (passwordElOne.innerHTML === "" && passwordElTwo.innerHTML === "") {
     generatePassword(15)
   }
+
   copiedEl.textContent = ""
+  
 })
 
 function generatePassword(passwordLength) {
