@@ -7,7 +7,6 @@ document.querySelector('#app').innerHTML = `
     <span>random password</span></h1>
     <h2>Never use an insecure password again.</h2>
     <button id="generate-el">Generate passwords</button>
-    <button id="clear-el">Clear passwords</button>
     <div class="password-wrapper">
       <div id="password-el-one" class="password-section"></div>
       <div id="password-el-two" class="password-section"></div>
@@ -44,7 +43,6 @@ const charactersAlapha = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N
 const charactersNumbersSymbols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9","~","`","!","@","#","$","%","^","&","*","(",")","_","-","+","=","{","[","}","]",",","|",":",";","<",">",".","?","/"]
 
 let generateBtn = document.querySelector("#generate-el")
-let clearBtn = document.querySelector("#clear-el")
 let passwordElOne = document.querySelector("#password-el-one")
 let passwordElTwo = document.querySelector("#password-el-two")
 let passwordLengthEl = document.querySelector("#password-length")
@@ -83,7 +81,7 @@ generateBtn.addEventListener("click", function() {
   }
 
   copiedEl.textContent = ""
-  
+
 })
 
 function generatePassword(passwordLength) {
@@ -126,11 +124,6 @@ function generatePassword(passwordLength) {
   
 }
 
-clearBtn.addEventListener("click", function () {
-  passwordElOne.textContent = ""
-  passwordElTwo.textContent = ""
-  copiedEl.textContent = ""
-})
 
 passwordElOne.addEventListener("click", function() {
   let passwordCopyOne = passwordElOne.textContent
