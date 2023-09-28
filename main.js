@@ -63,7 +63,7 @@ let lettersToggle = document.querySelector("#letters-toggle:checked")
 let includeSymbols = true;
 let includeNumbers = true;
 let includeLetters = true; 
-let testing = true;
+
 
 generateBtn.addEventListener("click", function() {
   const passwordLength = parseInt(passwordLengthEl.value);
